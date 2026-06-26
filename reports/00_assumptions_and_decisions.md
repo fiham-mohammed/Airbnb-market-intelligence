@@ -108,5 +108,82 @@ structure that the assignment specifically asks us to analyze.
 
 ---
 
-*(Further entries added as Days 2–5 progress: cleaning decisions, dimensional model
-design, statistical test selection, etc.)*
+---
+
+### Decision 7 — Cleaning implementation: separate, named functions per transformation
+**Date:** Day 2
+**Choice:** `src/clean.py` implements each cleaning step (price parsing, date
+parsing, percentage parsing, boolean standardization, bathroom-field merge,
+property-type bucketing) as its own small function, composed together in
+`clean_listings()`.
+**Why:** Keeps each transformation auditable in isolation and testable on its
+own, rather than one large block where a mistake in one step is hard to
+isolate. Matches the assignment's emphasis on documenting *each* cleaning
+decision separately (Section 3.2).
+
+### Decision 8 — Boolean fields use pandas' nullable boolean dtype, not plain bool
+**Date:** Day 2
+**Finding (self-caught during validation):** an early version of the boolean
+standardization step produced an `object`-typed column instead of a proper
+boolean type when missing values (`None`) were present (144 hosts have not
+disclosed superhost status). This still worked but was imprecise — generic
+`object` columns don't get the same type-safety or fast vectorized handling
+that a real boolean dtype gets in pandas.
+**Fix:** Cast explicitly to pandas' nullable `boolean` dtype (`.astype("boolean")`),
+which correctly represents True/False/missing as `True`/`False`/`<NA>` instead
+of mixing Python `None` into a generic object column.
+**Why this is worth logging:** Validating your own cleaning output and fixing
+issues you find in it — rather than assuming a script ran error-free just
+because it didn't crash — is itself part of the data engineering discipline
+this assignment is testing for.
+
+### Decision 9 — Property type bucketing: 5 broad categories derived from `property_type`
+**Date:** Day 2
+**Choice:** Mapped the 70+ raw `property_type` free-text values into 5 buckets:
+Entire place, Private room, Shared room, Hotel/B&B, Other — using keyword
+matching on the text rather than a hardcoded lookup table of all 70+ values.
+**Why:** Keyword matching on "entire", "private room", "shared room",
+"hotel"/"bnb" generalizes to property types we haven't seen yet (useful if
+this pipeline is later pointed at a different city with different property
+type strings), whereas a hardcoded lookup table would silently miss any new
+value and dump it into a catch-all without warning.
+**Validated:** Checked the resulting "Other" bucket (42 listings, 0.9% of
+data) manually — confirmed it correctly captures genuinely unusual property
+types (boats, tents, a castle, a converted shipping container) rather than
+hiding a bucketing bug.
+
+### Decision 11 — Star schema design: one fact table, three dimensions
+**Date:** Day 2
+**Options considered:** (a) Fully normalized relational schema with many
+small tables; (b) one wide denormalized table (no separate dimensions);
+(c) a single fact table (`fact_listing`, grain = one row per listing) with
+three supporting dimension tables (`dim_host`, `dim_neighbourhood`,
+`dim_date`), leaving `calendar_raw`/`reviews_raw` as-is since they're
+already at their natural grain.
+**Choice:** (c).
+**Why:** The dataset's natural unit of analysis is "one listing" — host and
+neighbourhood attributes describe a listing but aren't independent
+measurable events themselves, so they belong as dimensions, not separate
+facts. A fully normalized schema (a) would add join complexity with no
+analytical benefit at this dataset's scale. A single flat table (b) would
+duplicate host/neighbourhood attributes across every listing row and make
+"host_since hasn't changed" type integrity bugs possible. `dim_date` is
+precomputed with weekend/season/festival-month flags so seasonal queries
+(Section 4.3) don't need to recompute date logic every time.
+**Trade-off accepted:** `dim_host` is derived (not present in the source
+data) by deduplicating host attributes from listings.csv using "first
+non-null value per host_id." This assumes a host's descriptive attributes
+(name, since-date, superhost status) are consistent across all of that
+host's listings. Spot-checked this assumption; did not find contradictory
+values across a host's multiple listings in the rows checked.
+**Validation:** Built and ran 3 test queries (top neighbourhoods by price,
+superhost vs. non-superhost average rating, top hosts by listing count).
+Zero unmatched foreign keys on both host_key and neighbourhood_key across
+all 4,936 fact rows — confirms the join keys identified on Day 1
+(`host_id`, `neighbourhood_cleansed`) are fully reliable for this dataset.
+Results are also directionally sensible: Old Town/Princes Street area
+(Edinburgh's historic tourist core) has the highest median price among
+well-represented neighbourhoods; superhosts average a higher rating
+(4.88 vs 4.69) than non-superhosts, consistent with the platform's own
+superhost-criteria logic.
+

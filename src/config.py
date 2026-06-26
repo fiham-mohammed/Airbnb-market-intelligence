@@ -30,9 +30,9 @@ CITY_CONFIG = {
     "snapshot_date": "2025-09-21",
     "source_url": "https://insideairbnb.com/edinburgh/",
     "files": {
-        "listings": RAW_DIR / "listings.csv",
-        "calendar": RAW_DIR / "calendar.csv",
-        "reviews": RAW_DIR / "reviews.csv",
+        "listings": RAW_DIR / "listings.csv.gz",
+        "calendar": RAW_DIR / "calendar.csv.gz",
+        "reviews": RAW_DIR / "reviews.csv.gz",
         "neighbourhoods": RAW_DIR / "neighbourhoods.csv",
         "neighbourhoods_geojson": RAW_DIR / "neighbourhoods.geojson",
     },

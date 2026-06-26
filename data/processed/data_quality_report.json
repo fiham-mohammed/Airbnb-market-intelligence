@@ -1,0 +1,1149 @@
+{
+  "city": "Edinburgh",
+  "snapshot_date": "2025-09-21",
+  "listings": {
+    "table_name": "listings",
+    "n_rows": 4936,
+    "n_columns": 79,
+    "n_duplicate_rows": 0,
+    "columns": [
+      {
+        "column": "id",
+        "dtype": "int64",
+        "n_missing": 0,
+        "pct_missing": 0.0,
+        "n_unique": 4936,
+        "sample_values": [
+          "15420",
+          "24288",
+          "38628"
+        ]
+      },
+      {
+        "column": "listing_url",
+        "dtype": "str",
+        "n_missing": 0,
+        "pct_missing": 0.0,
+        "n_unique": 4936,
+        "sample_values": [
+          "https://www.airbnb.com/rooms/15420",
+          "https://www.airbnb.com/rooms/24288",
+          "https://www.airbnb.com/rooms/38628"
+        ]
+      },
+      {
+        "column": "scrape_id",
+        "dtype": "int64",
+        "n_missing": 0,
+        "pct_missing": 0.0,
+        "n_unique": 1,
+        "sample_values": [
+          "20250921034137",
+          "20250921034137",
+          "20250921034137"
+        ]
+      },
+      {
+        "column": "last_scraped",
+        "dtype": "str",
+        "n_missing": 0,
+        "pct_missing": 0.0,
+        "n_unique": 1,
+        "sample_values": [
+          "2025-09-21",
+          "2025-09-21",
+          "2025-09-21"
+        ]
+      },
+      {
+        "column": "source",
+        "dtype": "str",
+        "n_missing": 0,
+        "pct_missing": 0.0,
+        "n_unique": 1,
+        "sample_values": [
+          "city scrape",
+          "city scrape",
+          "city scrape"
+        ]
+      },
+      {
+        "column": "name",
+        "dtype": "str",
+        "n_missing": 0,
+        "pct_missing": 0.0,
+        "n_unique": 4885,
+        "sample_values": [
+          "Georgian Boutique Apt City Centre",
+          "Cool central Loft, sleeps 4, 2 double bed+en-suite",
+          "Edinburgh Holiday Let"
+        ]
+      },
+      {
+        "column": "description",
+        "dtype": "str",
+        "n_missing": 56,
+        "pct_missing": 1.13,
+        "n_unique": 4568,
+        "sample_values": [
+          "Stunning, spacious ground floor apartment minutes from Princes Street.  Your own \u2018home from home\u2019 in an historic property, we strive to offer you the highest standards of comfort and attention to detail.<br /><br />The apartment is completely self-contained with no shared facilities.  It  has its own front door onto the street so there is no shared lobby or stair.",
+          "Upper level of duplex. Boho rustic-chic former warehouse Loft located in lively University quarter of City centre for exploring historic Old Town and at heart of Fringe, Jazz and International Festival venues. Great location for exploring, eating out and good pubs all year round (NB owner\u2019s suite on lower level).",
+          "Self contained studio 6 minutes by train to Edinburgh's city centre .Located between the city and the vibrant seaside suburb of  Portobello . The Brunstane Studio is the perfect place. <br />King sized bed with topper. Free Wi-Fi (7EN74N49) and parking."
+        ]
+      },
+      {
+        "column": "neighborhood_overview",
+        "dtype": "str",
+        "n_missing": 2160,
+        "pct_missing": 43.76,
+        "n_unique": 2433,
+        "sample_values": [
+          "The neighbourhood is in the historic New Town, renowned for its Georgian architecture and a World Heritage Site.  Whilst it is a 5 minute walk to Princes Street, it has its own distinctive atmosphere with lovely independent shops, boutiques, restaurants & bars.<br />To view my Guidebook, click on More about Location under the map, then click on Show Host Guidebook at the bottom of the Location pop-up.",
+          "Boho, studenty, lively, cool neighbourhood",
+          "Quiet and easy access to outside. Fort Kinnaird walking distance - variety of shops , cinema etc . Portobello beach and Musselburgh harbour within walking distance also."
+        ]
+      },
+      {
+        "column": "picture_url",
+        "dtype": "str",
+        "n_missing": 0,
+        "pct_missing": 0.0,
+        "n_unique": 4899,
+        "sample_values": [
+          "https://a0.muscache.com/pictures/cf69631f-4194-4020-ae63-9d745a90ec74.jpg",
+          "https://a0.muscache.com/pictures/3460007/887314c6_original.jpg",
+          "https://a0.muscache.com/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6Mzg2Mjg%3D/original/b96fa1b8-0f81-4636-95f5-6a981fe1ce1c.jpeg"
+        ]
+      },
+      {
+        "column": "host_id",
+        "dtype": "int64",
+        "n_missing": 0,
+        "pct_missing": 0.0,
+        "n_unique": 3037,
+        "sample_values": [
+          "60423",
+          "46498",
+          "165635"
+        ]
+      },
+      {
+        "column": "host_url",
+        "dtype": "str",
+        "n_missing": 0,
+        "pct_missing": 0.0,
+        "n_unique": 3037,
+        "sample_values": [
+          "https://www.airbnb.com/users/show/60423",
+          "https://www.airbnb.com/users/show/46498",
+          "https://www.airbnb.com/users/show/165635"
+        ]
+      },
+      {
+        "column": "host_name",
+        "dtype": "str",
+        "n_missing": 2,
+        "pct_missing": 0.04,
+        "n_unique": 1578,
+        "sample_values": [
+          "Charlotte",
+          "Gordon",
+          "Trish"
+        ]
+      },
+      {
+        "column": "host_since",
+        "dtype": "str",
+        "n_missing": 2,
+        "pct_missing": 0.04,
+        "n_unique": 2152,
+        "sample_values": [
+          "2009-12-06",
+          "2009-10-17",
+          "2010-07-13"
+        ]
+      },
+      {
+        "column": "host_location",
+        "dtype": "str",
+        "n_missing": 950,
+        "pct_missing": 19.25,
+        "n_unique": 168,
+        "sample_values": [
+          "Edinburgh, United Kingdom",
+          "Edinburgh, United Kingdom",
+          "Edinburgh, United Kingdom"
+        ]
+      },
+      {
+        "column": "host_about",
+        "dtype": "str",
+        "n_missing": 2095,
+        "pct_missing": 42.44,
+        "n_unique": 1521,
+        "sample_values": [
+          "I have a background in property, having worked as an interior designer and on a number of renovations.  Born in Wales and brought up in south east England, I have lived in Scotland since 1990, mostly in Edinburgh but more recently in rural Perthshire.\nI remain hands-on and am always ready to respond to guest queries.",
+          "Principal\nStudio DuB\nArchitecture & Planning industry\n2006 \u2013 Present",
+          "Hi \r\nI like travelling and housing projects . I'm a keen cyclists and enjoy being outdoors with my small dog , Maisie !"
+        ]
+      },
+      {
+        "column": "host_response_time",
+        "dtype": "str",
+        "n_missing": 228,
+        "pct_missing": 4.62,
+        "n_unique": 4,
+        "sample_values": [
+          "within a few hours",
+          "within an hour",
+          "within an hour"
+        ]
+      },
+      {
+        "column": "host_response_rate",
+        "dtype": "str",
+        "n_missing": 228,
+        "pct_missing": 4.62,
+        "n_unique": 57,
+        "sample_values": [
+          "100%",
+          "100%",
+          "100%"
+        ]
+      },
+      {
+        "column": "host_acceptance_rate",
+        "dtype": "str",
+        "n_missing": 183,
+        "pct_missing": 3.71,
+        "n_unique": 85,
+        "sample_values": [
+          "94%",
+          "100%",
+          "100%"
+        ]
+      },
+      {
+        "column": "host_is_superhost",
+        "dtype": "str",
+        "n_missing": 144,
+        "pct_missing": 2.92,
+        "n_unique": 2,
+        "sample_values": [
+          "t",
+          "f",
+          "f"
+        ]
+      },
+      {
+        "column": "host_thumbnail_url",
+        "dtype": "str",
+        "n_missing": 2,
+        "pct_missing": 0.04,
+        "n_unique": 2915,
+        "sample_values": [
+          "https://a0.muscache.com/im/users/60423/profile_pic/1326194735/original.jpg?aki_policy=profile_small",
+          "https://a0.muscache.com/im/users/46498/profile_pic/1259125328/original.jpg?aki_policy=profile_small",
+          "https://a0.muscache.com/im/users/165635/profile_pic/1422300532/original.jpg?aki_policy=profile_small"
+        ]
+      },
+      {
+        "column": "host_picture_url",
+        "dtype": "str",
+        "n_missing": 2,
+        "pct_missing": 0.04,
+        "n_unique": 2915,
+        "sample_values": [
+          "https://a0.muscache.com/im/users/60423/profile_pic/1326194735/original.jpg?aki_policy=profile_x_medium",
+          "https://a0.muscache.com/im/users/46498/profile_pic/1259125328/original.jpg?aki_policy=profile_x_medium",
+          "https://a0.muscache.com/im/users/165635/profile_pic/1422300532/original.jpg?aki_policy=profile_x_medium"
+        ]
+      },
+      {
+        "column": "host_neighbourhood",
+        "dtype": "str",
+        "n_missing": 3441,
+        "pct_missing": 69.71,
+        "n_unique": 43,
+        "sample_values": [
+          "Southside",
+          "West End",
+          "Bethnal Green"
+        ]
+      },
+      {
+        "column": "host_listings_count",
+        "dtype": "float64",
+        "n_missing": 2,
+        "pct_missing": 0.04,
+        "n_unique": 62,
+        "sample_values": [
+          "2.0",
+          "1.0",
+          "1.0"
+        ]
+      },
+      {
+        "column": "host_total_listings_count",
+        "dtype": "float64",
+        "n_missing": 2,
+        "pct_missing": 0.04,
+        "n_unique": 80,
+        "sample_values": [
+          "5.0",
+          "1.0",
+          "1.0"
+        ]
+      },
+      {
+        "column": "host_verifications",
+        "dtype": "str",
+        "n_missing": 2,
+        "pct_missing": 0.04,
+        "n_unique": 6,
+        "sample_values": [
+          "['email', 'phone']",
+          "['email', 'phone']",
+          "['email', 'phone']"
+        ]
+      },
+      {
+        "column": "host_has_profile_pic",
+        "dtype": "str",
+        "n_missing": 2,
+        "pct_missing": 0.04,
+        "n_unique": 2,
+        "sample_values": [
+          "t",
+          "t",
+          "t"
+        ]
+      },
+      {
+        "column": "host_identity_verified",
+        "dtype": "str",
+        "n_missing": 2,
+        "pct_missing": 0.04,
+        "n_unique": 2,
+        "sample_values": [
+          "t",
+          "t",
+          "t"
+        ]
+      },
+      {
+        "column": "neighbourhood",
+        "dtype": "str",
+        "n_missing": 2160,
+        "pct_missing": 43.76,
+        "n_unique": 1,
+        "sample_values": [
+          "Neighborhood highlights",
+          "Neighborhood highlights",
+          "Neighborhood highlights"
+        ]
+      },
+      {
+        "column": "neighbourhood_cleansed",
+        "dtype": "str",
+        "n_missing": 0,
+        "pct_missing": 0.0,
+        "n_unique": 111,
+        "sample_values": [
+          "Old Town, Princes Street and Leith Street",
+          "Canongate, Southside and Dumbiedykes",
+          "Joppa"
+        ]
+      },
+      {
+        "column": "neighbourhood_group_cleansed",
+        "dtype": "float64",
+        "n_missing": 4936,
+        "pct_missing": 100.0,
+        "n_unique": 0,
+        "sample_values": []
+      },
+      {
+        "column": "latitude",
+        "dtype": "float64",
+        "n_missing": 0,
+        "pct_missing": 0.0,
+        "n_unique": 3983,
+        "sample_values": [
+          "55.95759",
+          "55.94498320836646",
+          "55.94215"
+        ]
+      },
+      {
+        "column": "longitude",
+        "dtype": "float64",
+        "n_missing": 0,
+        "pct_missing": 0.0,
+        "n_unique": 4317,
+        "sample_values": [
+          "-3.18805",
+          "-3.185293348616568",
+          "-3.0964"
+        ]
+      },
+      {
+        "column": "property_type",
+        "dtype": "str",
+        "n_missing": 0,
+        "pct_missing": 0.0,
+        "n_unique": 50,
+        "sample_values": [
+          "Entire rental unit",
+          "Entire loft",
+          "Entire rental unit"
+        ]
+      },
+      {
+        "column": "room_type",
+        "dtype": "str",
+        "n_missing": 0,
+        "pct_missing": 0.0,
+        "n_unique": 4,
+        "sample_values": [
+          "Entire home/apt",
+          "Entire home/apt",
+          "Entire home/apt"
+        ]
+      },
+      {
+        "column": "accommodates",
+        "dtype": "int64",
+        "n_missing": 0,
+        "pct_missing": 0.0,
+        "n_unique": 16,
+        "sample_values": [
+          "2",
+          "4",
+          "2"
+        ]
+      },
+      {
+        "column": "bathrooms",
+        "dtype": "float64",
+        "n_missing": 3,
+        "pct_missing": 0.06,
+        "n_unique": 17,
+        "sample_values": [
+          "1.0",
+          "1.5",
+          "1.5"
+        ]
+      },
+      {
+        "column": "bathrooms_text",
+        "dtype": "str",
+        "n_missing": 6,
+        "pct_missing": 0.12,
+        "n_unique": 26,
+        "sample_values": [
+          "1 bath",
+          "1.5 baths",
+          "1.5 baths"
+        ]
+      },
+      {
+        "column": "bedrooms",
+        "dtype": "float64",
+        "n_missing": 3,
+        "pct_missing": 0.06,
+        "n_unique": 13,
+        "sample_values": [
+          "1.0",
+          "2.0",
+          "1.0"
+        ]
+      },
+      {
+        "column": "beds",
+        "dtype": "float64",
+        "n_missing": 18,
+        "pct_missing": 0.36,
+        "n_unique": 21,
+        "sample_values": [
+          "1.0",
+          "2.0",
+          "2.0"
+        ]
+      },
+      {
+        "column": "amenities",
+        "dtype": "str",
+        "n_missing": 0,
+        "pct_missing": 0.0,
+        "n_unique": 4784,
+        "sample_values": [
+          "[\"Gas stove\", \"Hair dryer\", \"Fire extinguisher\", \"Hangers\", \"Heating\", \"Blender\", \"Free dryer \\u2013 In unit\", \"Luggage dropoff allowed\", \"Dishwasher\", \"Stainless steel single oven\", \"Shower gel\", \"Room-darkening shades\", \"Coffee\", \"Hot water\", \"Self check-in\", \"Dishes and silverware\", \"Cleaning products\", \"Body soap\", \"Freezer\", \"Sound system\", \"Books and reading material\", \"Toaster\", \"Bed linens\", \"Baking sheet\", \"Paid parking off premises\", \"Single level home\", \"Bathtub\", \"Smoke alarm\", \"Board games\", \"Coffee maker: Nespresso\", \"Kitchen\", \"Microwave\", \"Shampoo\", \"TV\", \"Conditioner\", \"First aid kit\", \"Drying rack for clothing\", \"Extra pillows and blankets\", \"Iron\", \"Clothing storage\", \"Hot water kettle\", \"Private entrance\", \"Dining table\", \"Courtyard view\", \"Lockbox\", \"Wine glasses\", \"Cooking basics\", \"Carbon monoxide alarm\", \"Free washer \\u2013 In unit\", \"Wifi\", \"Garden view\", \"Essentials\", \"Refrigerator\"]",
+          "[\"Gas stove\", \"Hair dryer\", \"Fire extinguisher\", \"Hangers\", \"Dishwasher\", \"Central heating\", \"Hot water\", \"Laundromat nearby\", \"Dishes and silverware\", \"Cleaning products\", \"Long term stays allowed\", \"Freezer\", \"Books and reading material\", \"Toaster\", \"Bed linens\", \"Baking sheet\", \"Paid parking off premises\", \"Bathtub\", \"Smoke alarm\", \"Board games\", \"Kitchen\", \"Microwave\", \"Clothing storage: walk-in closet and closet\", \"TV\", \"Drying rack for clothing\", \"Iron\", \"Hot water kettle\", \"Whirlpool stainless steel oven\", \"Dining table\", \"Elevator\", \"Wine glasses\", \"Cooking basics\", \"Host greets you\", \"Carbon monoxide alarm\", \"Free washer \\u2013 In unit\", \"Dedicated workspace\", \"Wifi\", \"Essentials\", \"Refrigerator\"]",
+          "[\"Free parking on premises\", \"Oven\", \"Hair dryer\", \"Hangers\", \"Heating\", \"Free street parking\", \"Waterfront\", \"Private patio or balcony\", \"Keypad\", \"Hot water\", \"Self check-in\", \"Dishes and silverware\", \"Cleaning products\", \"Body soap\", \"Long term stays allowed\", \"Pets allowed\", \"Freezer\", \"Coffee maker\", \"Lake access\", \"Smoke alarm\", \"Kitchen\", \"Microwave\", \"Shampoo\", \"TV\", \"Iron\", \"Washer\", \"Hot water kettle\", \"Stove\", \"Courtyard view\", \"Beach access \\u2013 Beachfront\", \"Cooking basics\", \"Mini fridge\", \"Fireplace guards\", \"Window guards\", \"Carbon monoxide alarm\", \"Dedicated workspace\", \"Wifi\", \"Essentials\", \"Refrigerator\"]"
+        ]
+      },
+      {
+        "column": "price",
+        "dtype": "str",
+        "n_missing": 11,
+        "pct_missing": 0.22,
+        "n_unique": 604,
+        "sample_values": [
+          "$155.00",
+          "$98.00",
+          "$117.00"
+        ]
+      },
+      {
+        "column": "minimum_nights",
+        "dtype": "int64",
+        "n_missing": 0,
+        "pct_missing": 0.0,
+        "n_unique": 33,
+        "sample_values": [
+          "3",
+          "3",
+          "4"
+        ]
+      },
+      {
+        "column": "maximum_nights",
+        "dtype": "int64",
+        "n_missing": 0,
+        "pct_missing": 0.0,
+        "n_unique": 102,
+        "sample_values": [
+          "30",
+          "365",
+          "31"
+        ]
+      },
+      {
+        "column": "minimum_minimum_nights",
+        "dtype": "float64",
+        "n_missing": 10,
+        "pct_missing": 0.2,
+        "n_unique": 33,
+        "sample_values": [
+          "1.0",
+          "3.0",
+          "3.0"
+        ]
+      },
+      {
+        "column": "maximum_minimum_nights",
+        "dtype": "float64",
+        "n_missing": 10,
+        "pct_missing": 0.2,
+        "n_unique": 53,
+        "sample_values": [
+          "4.0",
+          "3.0",
+          "4.0"
+        ]
+      },
+      {
+        "column": "minimum_maximum_nights",
+        "dtype": "float64",
+        "n_missing": 10,
+        "pct_missing": 0.2,
+        "n_unique": 92,
+        "sample_values": [
+          "30.0",
+          "1125.0",
+          "31.0"
+        ]
+      },
+      {
+        "column": "maximum_maximum_nights",
+        "dtype": "float64",
+        "n_missing": 10,
+        "pct_missing": 0.2,
+        "n_unique": 90,
+        "sample_values": [
+          "30.0",
+          "1125.0",
+          "31.0"
+        ]
+      },
+      {
+        "column": "minimum_nights_avg_ntm",
+        "dtype": "float64",
+        "n_missing": 0,
+        "pct_missing": 0.0,
+        "n_unique": 149,
+        "sample_values": [
+          "3.0",
+          "3.0",
+          "4.0"
+        ]
+      },
+      {
+        "column": "maximum_nights_avg_ntm",
+        "dtype": "float64",
+        "n_missing": 0,
+        "pct_missing": 0.0,
+        "n_unique": 372,
+        "sample_values": [
+          "30.0",
+          "1125.0",
+          "31.0"
+        ]
+      },
+      {
+        "column": "calendar_updated",
+        "dtype": "float64",
+        "n_missing": 4936,
+        "pct_missing": 100.0,
+        "n_unique": 0,
+        "sample_values": []
+      },
+      {
+        "column": "has_availability",
+        "dtype": "str",
+        "n_missing": 9,
+        "pct_missing": 0.18,
+        "n_unique": 1,
+        "sample_values": [
+          "t",
+          "t",
+          "t"
+        ]
+      },
+      {
+        "column": "availability_30",
+        "dtype": "int64",
+        "n_missing": 0,
+        "pct_missing": 0.0,
+        "n_unique": 31,
+        "sample_values": [
+          "0",
+          "3",
+          "13"
+        ]
+      },
+      {
+        "column": "availability_60",
+        "dtype": "int64",
+        "n_missing": 0,
+        "pct_missing": 0.0,
+        "n_unique": 61,
+        "sample_values": [
+          "2",
+          "5",
+          "25"
+        ]
+      },
+      {
+        "column": "availability_90",
+        "dtype": "int64",
+        "n_missing": 0,
+        "pct_missing": 0.0,
+        "n_unique": 91,
+        "sample_values": [
+          "6",
+          "15",
+          "55"
+        ]
+      },
+      {
+        "column": "availability_365",
+        "dtype": "int64",
+        "n_missing": 0,
+        "pct_missing": 0.0,
+        "n_unique": 366,
+        "sample_values": [
+          "164",
+          "157",
+          "318"
+        ]
+      },
+      {
+        "column": "calendar_last_scraped",
+        "dtype": "str",
+        "n_missing": 0,
+        "pct_missing": 0.0,
+        "n_unique": 1,
+        "sample_values": [
+          "2025-09-21",
+          "2025-09-21",
+          "2025-09-21"
+        ]
+      },
+      {
+        "column": "number_of_reviews",
+        "dtype": "int64",
+        "n_missing": 0,
+        "pct_missing": 0.0,
+        "n_unique": 585,
+        "sample_values": [
+          "647",
+          "397",
+          "75"
+        ]
+      },
+      {
+        "column": "number_of_reviews_ltm",
+        "dtype": "int64",
+        "n_missing": 0,
+        "pct_missing": 0.0,
+        "n_unique": 134,
+        "sample_values": [
+          "65",
+          "55",
+          "2"
+        ]
+      },
+      {
+        "column": "number_of_reviews_l30d",
+        "dtype": "int64",
+        "n_missing": 0,
+        "pct_missing": 0.0,
+        "n_unique": 22,
+        "sample_values": [
+          "4",
+          "1",
+          "0"
+        ]
+      },
+      {
+        "column": "availability_eoy",
+        "dtype": "int64",
+        "n_missing": 0,
+        "pct_missing": 0.0,
+        "n_unique": 103,
+        "sample_values": [
+          "6",
+          "15",
+          "61"
+        ]
+      },
+      {
+        "column": "number_of_reviews_ly",
+        "dtype": "int64",
+        "n_missing": 0,
+        "pct_missing": 0.0,
+        "n_unique": 134,
+        "sample_values": [
+          "64",
+          "55",
+          "2"
+        ]
+      },
+      {
+        "column": "estimated_occupancy_l365d",
+        "dtype": "int64",
+        "n_missing": 0,
+        "pct_missing": 0.0,
+        "n_unique": 79,
+        "sample_values": [
+          "255",
+          "255",
+          "16"
+        ]
+      },
+      {
+        "column": "estimated_revenue_l365d",
+        "dtype": "float64",
+        "n_missing": 11,
+        "pct_missing": 0.22,
+        "n_unique": 2315,
+        "sample_values": [
+          "39525.0",
+          "24990.0",
+          "1872.0"
+        ]
+      },
+      {
+        "column": "first_review",
+        "dtype": "str",
+        "n_missing": 286,
+        "pct_missing": 5.79,
+        "n_unique": 2050,
+        "sample_values": [
+          "2011-01-18",
+          "2010-09-19",
+          "2014-06-13"
+        ]
+      },
+      {
+        "column": "last_review",
+        "dtype": "str",
+        "n_missing": 286,
+        "pct_missing": 5.79,
+        "n_unique": 422,
+        "sample_values": [
+          "2025-09-13",
+          "2025-08-29",
+          "2024-12-17"
+        ]
+      },
+      {
+        "column": "review_scores_rating",
+        "dtype": "float64",
+        "n_missing": 286,
+        "pct_missing": 5.79,
+        "n_unique": 119,
+        "sample_values": [
+          "4.98",
+          "4.64",
+          "4.68"
+        ]
+      },
+      {
+        "column": "review_scores_accuracy",
+        "dtype": "float64",
+        "n_missing": 286,
+        "pct_missing": 5.79,
+        "n_unique": 107,
+        "sample_values": [
+          "4.99",
+          "4.81",
+          "4.77"
+        ]
+      },
+      {
+        "column": "review_scores_cleanliness",
+        "dtype": "float64",
+        "n_missing": 286,
+        "pct_missing": 5.79,
+        "n_unique": 124,
+        "sample_values": [
+          "4.97",
+          "4.39",
+          "4.65"
+        ]
+      },
+      {
+        "column": "review_scores_checkin",
+        "dtype": "float64",
+        "n_missing": 286,
+        "pct_missing": 5.79,
+        "n_unique": 108,
+        "sample_values": [
+          "4.98",
+          "4.89",
+          "4.83"
+        ]
+      },
+      {
+        "column": "review_scores_communication",
+        "dtype": "float64",
+        "n_missing": 286,
+        "pct_missing": 5.79,
+        "n_unique": 101,
+        "sample_values": [
+          "4.99",
+          "4.92",
+          "4.77"
+        ]
+      },
+      {
+        "column": "review_scores_location",
+        "dtype": "float64",
+        "n_missing": 286,
+        "pct_missing": 5.79,
+        "n_unique": 107,
+        "sample_values": [
+          "4.98",
+          "4.85",
+          "4.72"
+        ]
+      },
+      {
+        "column": "review_scores_value",
+        "dtype": "float64",
+        "n_missing": 286,
+        "pct_missing": 5.79,
+        "n_unique": 131,
+        "sample_values": [
+          "4.92",
+          "4.67",
+          "4.75"
+        ]
+      },
+      {
+        "column": "license",
+        "dtype": "str",
+        "n_missing": 3720,
+        "pct_missing": 75.36,
+        "n_unique": 1110,
+        "sample_values": [
+          "EH-70886-F",
+          "EH-67902-R",
+          "EH-69283-F"
+        ]
+      },
+      {
+        "column": "instant_bookable",
+        "dtype": "str",
+        "n_missing": 0,
+        "pct_missing": 0.0,
+        "n_unique": 2,
+        "sample_values": [
+          "f",
+          "f",
+          "f"
+        ]
+      },
+      {
+        "column": "calculated_host_listings_count",
+        "dtype": "int64",
+        "n_missing": 0,
+        "pct_missing": 0.0,
+        "n_unique": 29,
+        "sample_values": [
+          "1",
+          "1",
+          "1"
+        ]
+      },
+      {
+        "column": "calculated_host_listings_count_entire_homes",
+        "dtype": "int64",
+        "n_missing": 0,
+        "pct_missing": 0.0,
+        "n_unique": 29,
+        "sample_values": [
+          "1",
+          "1",
+          "1"
+        ]
+      },
+      {
+        "column": "calculated_host_listings_count_private_rooms",
+        "dtype": "int64",
+        "n_missing": 0,
+        "pct_missing": 0.0,
+        "n_unique": 13,
+        "sample_values": [
+          "0",
+          "0",
+          "0"
+        ]
+      },
+      {
+        "column": "calculated_host_listings_count_shared_rooms",
+        "dtype": "int64",
+        "n_missing": 0,
+        "pct_missing": 0.0,
+        "n_unique": 4,
+        "sample_values": [
+          "0",
+          "0",
+          "0"
+        ]
+      },
+      {
+        "column": "reviews_per_month",
+        "dtype": "float64",
+        "n_missing": 286,
+        "pct_missing": 5.79,
+        "n_unique": 818,
+        "sample_values": [
+          "3.62",
+          "2.17",
+          "0.55"
+        ]
+      }
+    ],
+    "validation_issues": {
+      "negative_price": 0,
+      "invalid_latitude": 0,
+      "invalid_longitude": 0,
+      "min_nights_below_floor": 0
+    }
+  },
+  "neighbourhoods": {
+    "table_name": "neighbourhoods",
+    "n_rows": 111,
+    "n_columns": 2,
+    "n_duplicate_rows": 0,
+    "columns": [
+      {
+        "column": "neighbourhood_group",
+        "dtype": "float64",
+        "n_missing": 111,
+        "pct_missing": 100.0,
+        "n_unique": 0,
+        "sample_values": []
+      },
+      {
+        "column": "neighbourhood",
+        "dtype": "str",
+        "n_missing": 0,
+        "pct_missing": 0.0,
+        "n_unique": 111,
+        "sample_values": [
+          "Abbeyhill",
+          "Baberton and Juniper Green",
+          "Balerno and Bonnington Village"
+        ]
+      }
+    ]
+  },
+  "calendar": {
+    "table_name": "calendar_raw",
+    "n_rows": 1801640,
+    "n_columns": 7,
+    "n_duplicate_rows": 0,
+    "columns": [
+      {
+        "column": "listing_id",
+        "dtype": "BIGINT",
+        "n_missing": 0,
+        "pct_missing": 0.0,
+        "n_unique": 4936,
+        "sample_values": [
+          "615726",
+          "834777",
+          "838551"
+        ]
+      },
+      {
+        "column": "date",
+        "dtype": "DATE",
+        "n_missing": 0,
+        "pct_missing": 0.0,
+        "n_unique": 365,
+        "sample_values": [
+          "2025-09-25",
+          "2025-11-03",
+          "2025-11-29"
+        ]
+      },
+      {
+        "column": "available",
+        "dtype": "BOOLEAN",
+        "n_missing": 0,
+        "pct_missing": 0.0,
+        "n_unique": 2,
+        "sample_values": [
+          "False",
+          "True"
+        ]
+      },
+      {
+        "column": "price",
+        "dtype": "VARCHAR",
+        "n_missing": 1801640,
+        "pct_missing": 100.0,
+        "n_unique": 0,
+        "sample_values": []
+      },
+      {
+        "column": "adjusted_price",
+        "dtype": "VARCHAR",
+        "n_missing": 1801640,
+        "pct_missing": 100.0,
+        "n_unique": 0,
+        "sample_values": []
+      },
+      {
+        "column": "minimum_nights",
+        "dtype": "BIGINT",
+        "n_missing": 0,
+        "pct_missing": 0.0,
+        "n_unique": 61,
+        "sample_values": [
+          "51",
+          "32",
+          "365"
+        ]
+      },
+      {
+        "column": "maximum_nights",
+        "dtype": "BIGINT",
+        "n_missing": 0,
+        "pct_missing": 0.0,
+        "n_unique": 341,
+        "sample_values": [
+          "55",
+          "38",
+          "36"
+        ]
+      }
+    ]
+  },
+  "reviews": {
+    "table_name": "reviews_raw",
+    "n_rows": 559087,
+    "n_columns": 6,
+    "n_duplicate_rows": 0,
+    "columns": [
+      {
+        "column": "listing_id",
+        "dtype": "BIGINT",
+        "n_missing": 0,
+        "pct_missing": 0.0,
+        "n_unique": 4650,
+        "sample_values": [
+          "9085590",
+          "10517191",
+          "12060563"
+        ]
+      },
+      {
+        "column": "id",
+        "dtype": "BIGINT",
+        "n_missing": 0,
+        "pct_missing": 0.0,
+        "n_unique": 559087,
+        "sample_values": [
+          "1017283829685445390",
+          "1049924978157700662",
+          "1058674202071228423"
+        ]
+      },
+      {
+        "column": "date",
+        "dtype": "DATE",
+        "n_missing": 0,
+        "pct_missing": 0.0,
+        "n_unique": 4917,
+        "sample_values": [
+          "2023-09-21",
+          "2023-12-15",
+          "2024-04-27"
+        ]
+      },
+      {
+        "column": "reviewer_id",
+        "dtype": "BIGINT",
+        "n_missing": 0,
+        "pct_missing": 0.0,
+        "n_unique": 522517,
+        "sample_values": [
+          "4161557",
+          "515481426",
+          "5723370"
+        ]
+      },
+      {
+        "column": "reviewer_name",
+        "dtype": "VARCHAR",
+        "n_missing": 0,
+        "pct_missing": 0.0,
+        "n_unique": 69150,
+        "sample_values": [
+          "Peilin",
+          "Damien",
+          "Danielle"
+        ]
+      },
+      {
+        "column": "comments",
+        "dtype": "VARCHAR",
+        "n_missing": 0,
+        "pct_missing": 0.0,
+        "n_unique": 547079,
+        "sample_values": [
+          "I thoroughly enjoyed my stay at Pier Luigi\u2019s place. It was the perfect size for me by myself and was equipped with everything I needed. The location was ideal as well and handy with the local shops.",
+          "Lovely place! clean, comfy and close to everything you could need, would defintiely recommend :)",
+          "We really enjoyed our stay at Rados Airbnb. He was very helpful and very quick to respond to any questions we had. The location is perfect and it\u2019s very easy to walk into the city centre. We would definitely stay here again."
+        ]
+      }
+    ]
+  }
+}

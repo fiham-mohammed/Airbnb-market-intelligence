@@ -1,0 +1,7 @@
+
+data/processed/*.duckdb
+data/processed/*.duckdb.wal
+data/raw/*.csv.gz
+
+__pycache__/
+*.pyc
