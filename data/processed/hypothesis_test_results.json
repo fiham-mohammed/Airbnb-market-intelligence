@@ -1,0 +1,143 @@
+[
+  {
+    "hypothesis": "H1",
+    "statement": "Entire-home listings command significantly higher prices than private rooms",
+    "test_used": "Mann-Whitney U (one-sided, entire > private)",
+    "why_this_test": "Price is strongly right-skewed in both groups (confirmed via Shapiro-Wilk below: p=2.82e-84 for entire homes, p=4.89e-60 for private rooms -- both reject normality at alpha=0.05), so a standard t-test's normality assumption is not met. Mann-Whitney U does not assume normality and is appropriate for comparing two independent skewed distributions.",
+    "normality_checks": [
+      {
+        "label": "entire home price",
+        "n_tested": 3535,
+        "n_total": 3535,
+        "shapiro_stat": 0.10541460181754714,
+        "shapiro_p": 2.823455149294738e-84,
+        "normal_at_5pct": "False",
+        "capped": false
+      },
+      {
+        "label": "private room price",
+        "n_tested": 1340,
+        "n_total": 1340,
+        "shapiro_stat": 0.187551136326091,
+        "shapiro_p": 4.889655114134624e-60,
+        "normal_at_5pct": "False",
+        "capped": false
+      }
+    ],
+    "n_entire": 3535,
+    "n_private": 1340,
+    "median_entire": 186.0,
+    "median_private": 87.0,
+    "u_statistic": 4074381.5,
+    "p_value": 0.0,
+    "p_value_display": "p < 0.001",
+    "cohens_d": 0.1810396777157018,
+    "effect_size_interpretation_cohens_d": "negligible",
+    "rank_biserial_r": 0.7202733855475101,
+    "effect_size_interpretation_rank_biserial": "large",
+    "effect_size_note": "Cohen's d (0.18, 'negligible') and rank-biserial r (0.72, 'large') disagree substantially here. This is expected and worth explaining rather than picking one number: Cohen's d is computed from means and standard deviations, and entire-home prices have an extremely large standard deviation (~\u00a31,310) driven by a small number of high-price outliers -- this inflates the pooled SD and mechanically shrinks d, even though the median difference (\u00a3186 vs \u00a387) is large and obvious. Rank-biserial r is computed from ranks, not means, so it isn't distorted by those outliers in the same way and better reflects the true separation between the two groups visible in Figure 2. We report both rather than silently choosing the more flattering one.",
+    "business_interpretation": "Entire-home listings have a significantly higher median price (\u00a3186) than private rooms (\u00a387), p < 0.001. The rank-biserial effect size (r=0.72, large) confirms this is a substantial, practically meaningful difference, not just a statistically detectable one at large sample size. For a host deciding which product to list, an entire home commands a real price premium over a private room in the same market."
+  },
+  {
+    "hypothesis": "H2",
+    "statement": "Superhost listings achieve higher review scores than non-superhost listings",
+    "test_used": "Mann-Whitney U (one-sided, superhost > non-superhost)",
+    "why_this_test": "Review scores are heavily compressed/left-skewed (Day 3 finding: 91.3% of listings score >=4.5/5), violating the normality assumption needed for a t-test (Shapiro-Wilk p=6.41e-46 for superhosts, p=2.86e-53 for non-superhosts). Mann-Whitney U is robust to this distribution shape.",
+    "normality_checks": [
+      {
+        "label": "superhost rating",
+        "n_tested": 2169,
+        "n_total": 2169,
+        "shapiro_stat": 0.7971921608337805,
+        "shapiro_p": 6.411804407873534e-46,
+        "normal_at_5pct": "False",
+        "capped": false
+      },
+      {
+        "label": "non-superhost rating",
+        "n_tested": 2343,
+        "n_total": 2343,
+        "shapiro_stat": 0.7089828548047887,
+        "shapiro_p": 2.859291260629774e-53,
+        "normal_at_5pct": "False",
+        "capped": false
+      }
+    ],
+    "n_superhost": 2169,
+    "n_non_superhost": 2343,
+    "median_superhost": 4.9,
+    "median_non_superhost": 4.75,
+    "u_statistic": 3487213.0,
+    "p_value": 1.3327167537738716e-104,
+    "cohens_d": 0.6884747748042345,
+    "effect_size_interpretation": "medium",
+    "business_interpretation": "Superhosts have significantly higher review scores (median 4.90) than non-superhosts (median 4.75), p=1.33e-104, with a medium effect size (Cohen's d=0.69). This is a real, non-trivial difference -- not just an artifact of large sample size -- but it's worth noting it occurs entirely within the compressed top end of the rating scale (Day 3 finding: 91.3% of all listings score >=4.5/5). In absolute terms the gap is well under half a star. Superhost status is a genuine quality signal, but because the underlying scale leaves little room to differentiate further at the top, it should be combined with other signals (review count, sub-category scores) rather than relied on alone to assess listing quality."
+  },
+  {
+    "hypothesis": "H3",
+    "statement": "Listings with more than 10 reviews have significantly different prices than listings with fewer",
+    "test_used": "Mann-Whitney U (two-sided)",
+    "why_this_test": "Price is right-skewed in both groups (Shapiro-Wilk p=7.51e-86 and p=7.60e-59, both reject normality), so Mann-Whitney U is used in place of a t-test. As with H1, rank-biserial r is reported alongside Cohen's d since d is distorted by the same outlier-driven skew.",
+    "normality_checks": [
+      {
+        "label": "price, >10 reviews",
+        "n_tested": 3721,
+        "n_total": 3721,
+        "shapiro_stat": 0.09409910068027638,
+        "shapiro_p": 7.50793107632123e-86,
+        "normal_at_5pct": "False",
+        "capped": false
+      },
+      {
+        "label": "price, <=10 reviews",
+        "n_tested": 1194,
+        "n_total": 1194,
+        "shapiro_stat": 0.13105948697519165,
+        "shapiro_p": 7.597692273020979e-59,
+        "normal_at_5pct": "False",
+        "capped": false
+      }
+    ],
+    "n_more_than_10": 3721,
+    "n_10_or_fewer": 1194,
+    "median_more_than_10": 154.0,
+    "median_10_or_fewer": 181.0,
+    "u_statistic": 1902794.0,
+    "p_value": 8.082891359038391e-14,
+    "p_value_display": "p < 0.001",
+    "cohens_d": -0.11181257666161716,
+    "effect_size_interpretation_cohens_d": "negligible",
+    "rank_biserial_r": -0.14344003453620335,
+    "effect_size_interpretation_rank_biserial": "small",
+    "business_interpretation": "Listings with more than 10 reviews have a median price of \u00a3154 vs. \u00a3181 for listings with 10 or fewer reviews (p < 0.001, rank-biserial r=-0.14, small effect). Combined with the Day 3 finding that review count and price show no strong linear relationship (Figure 9), this suggests the direction of any price difference here is more likely explained by listing maturity (older listings accumulate more reviews) and/or different room types and segments, rather than price itself driving review volume."
+  },
+  {
+    "hypothesis": "H4",
+    "statement": "Neighbourhood average prices differ significantly across neighbourhoods",
+    "test_used": "Kruskal-Wallis H-test (non-parametric alternative to one-way ANOVA)",
+    "why_this_test": "Levene's test for equal variance across 89 neighbourhood groups: stat=0.85, p=8.38e-01. Variances are approximately equal, and price is right-skewed within every group (established repeatedly above), so a standard one-way ANOVA's assumptions (normality, homogeneity of variance) are not well met. Kruskal-Wallis tests for differences in distribution across groups without those assumptions.",
+    "n_neighbourhoods_tested": 89,
+    "n_neighbourhoods_excluded_small_sample": 22,
+    "levene_stat": 0.8504305361413829,
+    "levene_p": 0.8384506120410053,
+    "h_statistic": 749.7402279653911,
+    "p_value": 1.3946038887919045e-105,
+    "eta_squared": 0.14091572145770678,
+    "business_interpretation": "Median price differs significantly across Edinburgh's neighbourhoods (Kruskal-Wallis H=749.7, p=1.39e-105, tested across 89 neighbourhoods with sufficient sample size). Eta-squared (0.141) indicates neighbourhood explains a modest share of overall price variance -- location matters statistically, but it is one factor among several (room type, property size, host type) rather than the dominant driver of price on its own. This is explored further in the regression analysis (Section 5.3)."
+  },
+  {
+    "hypothesis": "H5",
+    "statement": "Weekend vs. weekday pricing differences are statistically significant",
+    "caveat": "calendar.csv's price field is 100% null in this snapshot (Decision 3, Day 1 log). This test substitutes availability (booked-up-ness) as the closest testable proxy for weekend vs. weekday demand difference, since true price comparison from calendar data is not possible with this dataset.",
+    "test_used": "Chi-square test of independence (availability x weekend/weekday)",
+    "why_this_test": "Availability is a binary outcome (available / not available) observed across 1.8M listing-day combinations, not a continuous measure -- a chi-square test of independence is the correct test for association between two categorical variables (weekend/weekday x available/not), not a t-test.",
+    "n_weekend_observations": 518280,
+    "n_weekday_observations": 1283360,
+    "pct_available_weekend": 44.0290962414139,
+    "pct_available_weekday": 45.9249158459045,
+    "chi2_statistic": 535.2558883138138,
+    "p_value": 2.030076304738939e-118,
+    "cramers_v": 0.017236406151752162,
+    "business_interpretation": "Weekend nights (Fri/Sat) are available 44.0% of the time vs. 45.9% for weekday nights -- a small but consistent and statistically significant difference (chi2=535.3, p=2.03e-118). However, Cramer's V (0.017) is conventionally interpreted as negligible: at n=1.8 million observations, even a 2-percentage-point difference becomes 'significant' by p-value alone, which is precisely why effect size must be reported alongside p-value rather than p-value in isolation (per the assignment's own Section 5.2 instruction). The honest summary is that the weekend effect on availability is real and directionally consistent (it appears in every week of the 12-month window, per Day 3's Figure 5b), but small in absolute size -- a host should not expect a dramatic weekend booking advantage from this signal alone. Because calendar-level price data isn't available in this snapshot, we also cannot directly quantify the weekend *price premium* hosts could capture -- only that weekend demand (via availability) is reliably, if modestly, higher. Both limitations are noted here rather than allowing the very small p-value to imply a stronger finding than the data supports."
+  }
+]

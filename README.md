@@ -55,18 +55,26 @@ python src/ingest.py
 # 4. Run cleaning
 python src/clean.py
 
-# 5. Build the dimensional model
+# 5. Run the dimensional model
 python src/model.py
+
+# 6. Run statistical hypothesis tests and regression analysis
+python src/stats_analysis.py
+python src/regression_analysis.py
+
+# 7. (Optional) Run ML price prediction with SHAP explainability
+python src/ml_price_prediction.py
 ```
 
 ## Order to review artifacts
 
-1. `reports/00_assumptions_and_decisions.md` — start here
-2. `reports/01_dataset_familiarization.md` — schema, relationships, data quality findings
-3. `data/processed/data_quality_report.json` — raw profiling output
-4. `src/` — pipeline code
-5. `notebooks/` — EDA and statistical analysis
-6. Final PDF report (see `reports/`)
+1. **`reports/Edinburgh_Airbnb_Market_Intelligence_Report.pdf`** — the complete 24-page final report; start here
+2. `reports/00_assumptions_and_decisions.md` — full dated decision log (24 entries)
+3. `reports/01_dataset_familiarization.md` — schema, relationships, data quality findings
+4. `notebooks/02_eda_and_statistics.ipynb` — annotated, fully-executed EDA + statistics + ML notebook
+5. `reports/02_eda_findings.md` / `03_statistical_findings.md` / `04_ml_findings.md` — written findings (prose form, same content as the report/notebook)
+6. `data/processed/data_quality_report.json` — raw profiling output
+7. `src/` — pipeline code
 
 ## AI Usage Disclosure
 

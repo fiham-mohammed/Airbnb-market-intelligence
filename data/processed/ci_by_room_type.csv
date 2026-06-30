@@ -1,0 +1,5 @@
+room_type,n,mean_price,ci_mean_lower,ci_mean_upper,median_price,ci_median_lower_bootstrap,ci_median_upper_bootstrap
+Entire home/apt,3535,337.18,293.99,380.36,186.0,183.0,189.0
+Hotel room,21,191.19,131.8,250.58,200.0,89.0,289.0
+Private room,1340,133.36,117.64,149.07,87.0,85.0,90.0
+Shared room,19,285.95,103.89,468.0,68.0,55.0,155.0

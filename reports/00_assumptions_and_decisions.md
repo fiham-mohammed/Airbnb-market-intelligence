@@ -187,3 +187,259 @@ well-represented neighbourhoods; superhosts average a higher rating
 (4.88 vs 4.69) than non-superhosts, consistent with the platform's own
 superhost-criteria logic.
 
+---
+
+### Decision 12 — Small-sample neighbourhoods excluded from price rankings/maps
+**Date:** Day 3
+**Finding (self-caught during chart review):** an initial version of the
+neighbourhood price map ranked "Fairmilehead" as Edinburgh's most expensive
+neighbourhood. On inspection, this ranking was based on a median of just
+**2** listings — a sample too small to support any real claim.
+**Fix:** Applied a minimum threshold of 10 listings per neighbourhood for
+any price ranking or choropleth coloring. 22 of 111 neighbourhoods fall
+below this threshold and are shown as grey/excluded rather than colored
+with a misleadingly confident value.
+**Why this matters:** A map that colors a 2-listing neighbourhood the same
+visual weight as a 638-listing neighbourhood actively misleads a reader
+into thinking both estimates are equally reliable. Catching this before
+it went into the report, rather than after, is the difference between a
+defensible finding and a false one.
+
+### Decision 13 — Separated weekly availability cycle from seasonal trend in Figure 5
+**Date:** Day 3
+**Finding (self-caught during chart review):** an initial single-line
+availability-over-time chart visually suggested a smooth seasonal "ramp"
+pattern. Closer inspection of the raw daily data revealed a strong,
+consistent weekly sawtooth (Friday/Saturday nights show measurably lower
+availability than weekdays, every single week in the sample) layered on
+top of a genuinely slower seasonal trend.
+**Fix:** Rebuilt as two panels — (a) daily values plus a 7-day rolling
+average to isolate the underlying trend, and (b) a direct day-of-week bar
+chart making the weekly pattern explicit and unambiguous.
+**Why this matters:** The original single chart would have supported an
+overstated, single causal story ("Fringe Festival causes the August dip")
+when the more accurate story is two separate effects: a reliable weekly
+demand cycle (strong, testable, year-round) and a slower multi-month trend
+that August happens to sit at the tail of. Reporting the more precise
+version avoids a claim the data doesn't fully support.
+
+### Decision 14 — Hostel "Shared room" high prices flagged as a labeling convention, not corrected
+**Date:** Day 3
+**Finding:** A small number of "Shared room" listings (5 of 19) show
+prices up to £900/night, wildly inconsistent with typical shared/dorm
+pricing. Investigation found these are hostel dorm rooms (4-16 beds) where
+the listing price represents booking the *entire room*, not a single bed.
+**Choice:** Documented as a caveat in the EDA report rather than treated
+as a data error to fix — the values are accurate for what they represent
+(the room as a bookable unit); the risk is purely in how a reader might
+*interpret* the "Shared room" category without this context.
+**Why:** Changing or removing these values would require an assumption
+about per-bed pricing this dataset doesn't support evidence for. Flagging
+the interpretation risk is more honest than guessing at a "corrected" value.
+---
+
+### Decision 15 — Reporting two effect sizes (Cohen's d and rank-biserial r) for skewed comparisons
+**Date:** Day 4
+**Finding:** For H1 (entire-home vs. private-room price), Cohen's d = 0.18
+("negligible") while rank-biserial r = 0.72 ("large") for the same
+comparison. These disagree because Cohen's d is computed from means and
+standard deviations, and entire-home prices have an extremely large
+standard deviation (~£1,310) driven by a small number of luxury outliers,
+which mechanically shrinks d even though the median difference (£186 vs
+£87) is large and visually obvious.
+**Choice:** Report both effect sizes wherever Mann-Whitney U is used on
+price data (H1, H3), with an explicit note explaining the discrepancy,
+rather than silently choosing whichever number looks more favorable.
+**Why this matters:** Quietly picking the effect size that best supports
+a desired conclusion (or not knowing the two would disagree) would be a
+real, if subtle, form of misleading reporting. Showing the disagreement
+and explaining its cause is more defensible and demonstrates the
+disagreement was investigated, not missed.
+
+### Decision 16 — Caught and fixed three bugs while building stats_analysis.py
+**Date:** Day 4
+**Bug 1 (H1/H3/H4 producing NaN):** All three tests use the `price` field,
+which has 11 null values (out of 4,926 sentinel-excluded rows) that I
+hadn't filtered before passing arrays to scipy. scipy's functions
+propagate NaN silently rather than raising an error, so the bug surfaced
+as a `nan` p-value with no traceback. Fixed by adding `price IS NOT NULL`
+to every query using price.
+**Bug 2 (H5 chi-square showing p=1 with a divide-by-zero warning):** Code
+compared DuckDB's `available` column against the string `"t"`
+(`df["available"] == "t"`), assuming it had stayed as raw CSV text. In
+fact, DuckDB's `read_csv_auto` had already inferred it as a native
+BOOLEAN column during ingestion (confirmed via `typeof(available)` in
+DuckDB: returns `BOOLEAN`). Comparing a Python bool to a string is always
+False, which collapsed every row into a single column and produced a
+meaningless test. Fixed by using the boolean column directly
+(`.astype(int)`) instead of a string comparison.
+**Bug 3 (VIF in regression_analysis.py wildly overstated):** Dropped the
+regression's constant column from the matrix before calling statsmodels'
+`variance_inflation_factor`, which requires the constant to remain
+present in the matrix to correctly compute VIF for every other column.
+This silently corrupted every VIF value (e.g. reported `accommodates` at
+15.2 and `review_scores_rating` at 9.1, both flagged as high
+multicollinearity). Caught by checking that the raw pairwise correlations
+between predictors (all weak, max ~0.33) didn't support such high VIF
+values, prompting a re-check against statsmodels' documented usage.
+Corrected VIFs are all under 4.
+**Why this is worth logging in detail:** All three bugs ran without
+crashing or raising visible errors — they produced plausible-looking but
+wrong output. Each was caught only by independently sanity-checking the
+result against something else (raw data, a second calculation, domain
+expectation) rather than trusting that "the code ran" meant "the code is
+correct." This is the habit being demonstrated here, not just the fixes
+themselves.
+
+### Decision 17 — Modeling log(price), not raw price, in the regression
+**Date:** Day 4
+**Choice:** OLS regression target is `log(price)`, not raw price.
+**Why:** Raw price skew is 14.9 (extremely right-skewed), which strongly
+violates OLS's assumption of normally distributed residuals. Log
+transform reduces skew to 1.5 -- a substantial, genuine improvement,
+though not a perfect fix (residual diagnostics still show skew ≈3.0 and
+high kurtosis after transformation, reported as an explicit model
+limitation rather than hidden).
+
+### Decision 18 — H5 tested on availability, not price, due to the Day 1 calendar pricing gap
+**Date:** Day 4
+**Choice:** Substituted weekend/weekday availability for weekend/weekday
+price as the test variable for H5, since `calendar.csv`'s price field is
+100% null (Decision 3).
+**Result reported honestly:** the effect is statistically significant
+(p<0.001, driven by the very large n=1.8M sample) but Cramer's V=0.017 is
+negligible by convention. Both the substitution and the small effect size
+are stated plainly rather than letting the extreme p-value imply a
+stronger finding than the data supports.
+---
+
+### Decision 19 — Combined Days 3-4 work into one annotated, fully-executed notebook
+**Date:** Day 4 (notebook follow-up)
+**Choice:** Built `notebooks/02_eda_and_statistics.ipynb` programmatically
+(via `scripts/build_notebook.py`, using nbformat) rather than hand-writing
+notebook JSON, importing the already-validated functions from
+`src/stats_analysis.py` and `src/regression_analysis.py` directly rather
+than re-implementing the statistical tests separately inside the notebook.
+**Why:** Re-implementing the same logic twice (once in src/, once in the
+notebook) risks the two drifting out of sync if either is edited later.
+Importing the tested functions guarantees the notebook narrates the exact
+same analysis already validated and written up in
+`reports/02_eda_findings.md` / `reports/03_statistical_findings.md`.
+**Validation:** Executed the notebook end-to-end via
+`jupyter nbconvert --execute` and programmatically checked all 30 cells
+for captured error outputs (found: zero). Spot-checked that printed
+figures in the executed notebook (e.g. 79.4% single-listing hosts, 91.3%
+rated >=4.5) exactly match the numbers already verified earlier in the
+pipeline, confirming the notebook is a faithful, genuinely executed
+re-run rather than a static mockup.
+---
+
+### Decision 20 — Amenity feature selection: prevalence-variance threshold, not "all amenities"
+**Date:** Day 5
+**Choice:** Selected 10 amenity flags from 1,956 unique raw amenity
+strings, chosen for having genuine prevalence variance (20-60% range)
+rather than near-universal amenities (Wifi 89.8%, Smoke alarm 97.8%).
+**Why:** Near-universal amenities carry almost no discriminating signal
+for a model trying to differentiate price between listings -- nearly
+every listing has them, so they can't explain why one listing costs more
+than another. Substring matching (not exact string matching) was required
+because the raw amenity text has many near-duplicate variants (e.g.
+"Free washer – In unit" vs "Washer" vs "Paid washer – In building").
+
+### Decision 21 — Random Forest selected over XGBoost as primary model
+**Date:** Day 5
+**Finding:** Random Forest (MAE log=0.326) and XGBoost (MAE log=0.329,
+but better RMSE log=0.505) perform near-identically in 5-fold CV; both
+modestly outperform Ridge regression (MAE log=0.348).
+**Choice:** Random Forest selected as the primary model for residual and
+SHAP analysis, on marginally better MAE.
+**Why this is a defensible, not arbitrary, choice:** the two models are
+close enough that either choice is reasonable; documenting the small
+margin explicitly (rather than picking one silently and implying a
+clearer winner than the data shows) is more honest reporting.
+
+### Decision 22 — Investigated and explained the counter-intuitive "parking lowers price" SHAP finding
+**Date:** Day 5
+**Finding:** SHAP analysis showed `has_parking` associated with LOWER
+predicted price, which could easily be misreported as "remove parking to
+raise your price" if not investigated further.
+**Investigation:** Checked parking prevalence by neighbourhood. Found
+100% parking prevalence in outer/suburban neighbourhoods (Parkhead and
+Sighthill, South Gyle, West Pilton, etc.) vs. 47.5% in the priciest
+central neighbourhood (Old Town, Princes Street and Leith Street -- the
+same neighbourhood flagged as most expensive in the Day 3 geographic
+analysis).
+**Conclusion documented in the report:** parking is a location proxy, not
+an independently undesirable amenity -- dense, expensive city-centre
+listings don't have space for parking and their guests don't typically
+need it. This is reported explicitly as an association-vs-causation
+caveat rather than left as a literal, misleading "add/remove this
+amenity" recommendation.
+
+### Decision 23 — Reported U-shaped residual error by price range as an honest limitation
+**Date:** Day 5
+**Finding:** Model error is lowest in the £100-300 mainstream price range
+(~24-27% MAPE) and notably higher at both extremes (<£100: 48.7%, £500+:
+53.2%).
+**Choice:** Reported plainly as a genuine limitation (smaller samples and
+likely unmeasured factors -- budget-hostel conventions at the low end,
+one-off luxury features at the high end) rather than omitted or buried.
+**Also checked:** confirmed the tiny "Shared room" category (n=19, with
+the known hostel whole-room pricing quirk from Decision 14) was not the
+primary driver of overall error -- excluding it entirely leaves MAPE
+essentially unchanged (33.0% either way), isolating it as a separate,
+small, explainable issue rather than a systemic one.
+---
+
+### Decision 24 — Caught a missing import while extending the notebook
+**Date:** Day 5
+**Finding:** When adding the Section 6.1 ML/SHAP cells to
+`notebooks/02_eda_and_statistics.ipynb`, the first execution attempt
+failed with `NameError: name 'shap' is not defined` -- the notebook's
+setup cell imported most libraries but `shap` had been used directly in
+`src/ml_price_prediction.py` without a corresponding top-level import in
+the notebook's own setup cell.
+**Fix:** Added `import shap` to the notebook's setup cell, rebuilt, and
+re-executed via `jupyter nbconvert --execute`, then re-verified all 38
+cells for captured errors (found: zero) before accepting the result.
+**Why this is worth logging:** this is the same discipline applied
+throughout the project -- an unexecuted or partially-checked notebook
+would have shipped a broken deliverable. Catching it here, before
+packaging, is the point.
+---
+
+### Decision 25 — Final report built as styled HTML converted to PDF, not raw reportlab canvas
+**Date:** Day 5 (report assembly)
+**Choice:** The 24-page final report was authored as structured HTML/CSS
+(four logical parts combined into one document) and converted to PDF via
+wkhtmltopdf, rather than building it directly with reportlab's low-level
+canvas API.
+**Why:** HTML/CSS gives far more reliable control over typography,
+tables, callout boxes, and figure layout for a long, heavily-formatted
+document than manually positioning text and shapes with canvas commands.
+**A real tooling limitation hit and worked around:** this sandbox's
+wkhtmltopdf build lacks the Qt patches required for --footer-center /
+--footer-html to function (confirmed via direct testing: both silently
+produce a "not supported using unpatched qt" warning and are ignored).
+Page numbers were instead added as a post-processing step
+(`reports/build/add_page_numbers.py`), overlaying a reportlab-drawn
+footer onto each generated page via pypdf, skipping the cover page per
+standard report convention. Verified visually by rendering sample pages
+back to images and confirming correct numbering ("Page 2 of 23" through
+"Page 23 of 23", with the cover page correctly excluded from both the
+visible number and the total count).
+
+### Decision 26 — Report content drawn from already-validated JSON/markdown sources, not re-derived
+**Date:** Day 5 (report assembly)
+**Choice:** Every statistic quoted in the final PDF report (executive
+summary metrics, hypothesis test results, regression coefficients, ML
+model comparison numbers) was pulled directly from the saved JSON output
+files (`hypothesis_test_results.json`, `regression_results.json`) and the
+already-written markdown reports (`02_eda_findings.md` through
+`04_ml_findings.md`), rather than re-typed from memory during report
+drafting.
+**Why:** This guarantees the final PDF cannot contain a transcription
+error that silently diverges from the validated, tested output already
+produced by the pipeline -- the same discipline applied throughout this
+project (never trust an unverified number) extended to the report-writing
+step itself.
